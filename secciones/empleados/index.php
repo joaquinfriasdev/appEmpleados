@@ -12,6 +12,7 @@
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
                     <th scope="col">Foto</th>
                     <th scope="col">CV</th>
                     <th scope="col">Puesto</th>
@@ -22,6 +23,7 @@
             <tbody>
                 <tr class="">
                     <td scope="row">Joaquín</td>
+                    <td scope="row">Frías</td>
                     <td>imagen.jpg</td>
                     <td>CV.PDF</td>
                     <td>Programador Senior</td>

@@ -1,3 +1,21 @@
+<?php 
+
+    include("../../bd.php");
+
+    if(isset($_GET['txtID'])){
+        $txtID=(isset($_GET['txtID']))?$_GET ['txtID']:"";
+
+        $sentencia=$conexion->prepare("DELETE FROM tbl_puestos WHERE id=:id");
+        $sentencia->bindParam(":id",$txtID);
+        $sentencia->execute();
+        header("Location:index.php");
+    }
+
+    $sentencia=$conexion->prepare("SELECT * FROM tbl_puestos");
+    $sentencia->execute();
+    $lista_tbl_puestos=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <?php include("../../templates/header.php"); ?>
 <br>
 
@@ -16,11 +34,18 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                <?php foreach($lista_tbl_puestos as $registro){?>
+
                     <tr class="">
-                        <td scope="row">1</td>
-                        <td>Programador Junior</td>
-                        <td><input name="btneditar" id="btneditar" class="btn btn-primary" type="button" value="Editar">|<input name="btneliminar" id="btneliminar" class="btn btn-danger" type="button" value="Eliminar"></td>
+                        <td><?php echo $registro['id'];?></td>
+                        <td><?php echo $registro['nombredelpuesto'];?></td>
+                        <td><a class="btn btn-primary" href="editar.php?txtID=<?php echo $registro['id'];?>" role="button">Editar</a>|
+                        <a class="btn btn-danger" href="index.php?txtID=<?php echo $registro['id'];?>" role="button">Eliminar</a>
+                    </td>
                     </tr>
+                    
+                <?php }?>
                 </tbody>
             </table>
         </div>
